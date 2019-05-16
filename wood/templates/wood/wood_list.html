@@ -1,0 +1,140 @@
+{% extends 'wood/base.html' %}
+
+{% block content %}
+
+    <div class="madeiras">
+        <div class="card text-center">
+            <div class="card-header">Xiloteca</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="card-title text-center">Madeiras</h5>
+                        <div class="list-group" id="madeiras" role="tablist">
+                            {% for wood in woods %}
+                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#{{ wood.nomeCientifico|cut:' '}}" role="tab">
+                                    {{ wood.nomeVulgar }}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-6">
+                        <div class="tab-content">
+                            {% for wood in woods %}
+                                <div class="tab-pane" id="{{ wood.nomeCientifico|cut:' '}}" role="tabpanel">
+                                    <h1 class="display-1">{{ wood.nomeVulgar }}</h1>
+                                    <dl class="row text-center">
+                                        <dt class="col-sm-6">Nome Cientifico</dt>
+                                        <dd class="col-sm-6">{{ wood.nomeCientifico }}</dd>
+                                        
+                                        <dt class="col-sm-6">Familia</dt>
+                                        <dd class="col-sm-6">{{ wood.familia }}</dd>
+
+                                        <dt class="col-sm-6">cor</dt>
+                                        <dd class="col-sm-6">
+                                            {% for cor in wood.cor.all %}
+                                                {% if forloop.last %}
+                                                    {{ cor }}
+                                                {% else %}
+                                                    {{ cor }},
+                                                {% endif %}
+                                            {% endfor %}
+                                        </dd>
+
+                                        <dt class="col-sm-6">Cheiro Característico</dt>
+                                        <dd class="col-sm-6">{{ wood.cheiro_carac }}</dd>
+
+                                        <dt class="col-sm-6">Textura</dt>
+                                        <dd class="col-sm-6">{{ wood.textura }}</dd>
+
+                                        <dt class="col-sm-6">Peso</dt>
+                                        <dd class="col-sm-6">{{ wood.peso }}</dd>
+
+                                        <dt class="col-sm-6">Parenquima</dt>
+                                        <dd class="col-sm-6">
+                                            {% for parenquima in wood.tipo_parenquima.all %}
+                                                {% if forloop.last %}
+                                                    {{ parenquima }}
+                                                {% else %}
+                                                    {{ parenquima }},
+                                                {% endif %}
+                                            {% endfor %}
+                                        </dd>
+
+                                        <dt class="col-sm-6">Distinção dos Poros</dt>
+                                        <dd class="col-sm-6">{{ wood.dist_poros }}</dd>
+
+                                        <dt class="col-sm-6">Tamanho dos Poros</dt>
+                                        <dd class="col-sm-6">{{ wood.tam_poros }}</dd>
+
+                                        <dt class="col-sm-6">Quantidade de Poros</dt>
+                                        <dd class="col-sm-6">{{ wood.qnt_poros }}</dd>
+
+                                        <dt class="col-sm-6">Disposição dos Poros</dt>
+                                        <dd class="col-sm-6">{{ wood.disp_poros }}</dd>
+
+                                        <dt class="col-sm-6">Poros em Cadeias Radiais</dt>
+                                        <dd class="col-sm-6">{{ wood.poros_cadeiasR }}</dd>
+
+                                        <dt class="col-sm-6">Poros Obstruídos por Títulos</dt>
+                                        <dd class="col-sm-6">{{ wood.poros_obsT }}</dd>
+
+                                        <dt class="col-sm-6">Contém Óleo Resinas</dt>
+                                        <dd class="col-sm-6">{{ wood.con_ol_res }}</dd>
+
+                                        <dt class="col-sm-6">Raios no Plano Transversal</dt>
+                                        <dd class="col-sm-6">{{ wood.con_ol_res }}</dd>
+
+                                        <dt class="col-sm-6">Raios no Plano Tangencial</dt>
+                                        <dd class="col-sm-6">{{ wood.raioP_tang }}</dd>
+
+                                        <dt class="col-sm-6">Raios no Plano Tangencial</dt>
+                                        <dd class="col-sm-6">{{ wood.raioP_tang }}</dd>
+
+                                        <dt class="col-sm-6">Canais Secretores</dt>
+                                        <dd class="col-sm-6">{{ wood.canais_secrt }}</dd>
+
+                                        <dt class="col-sm-6">Ocorrência</dt>
+                                        <dd class="col-sm-6">{{ wood.ocorrencia}}</dd>
+
+                                        <dt class="col-sm-6">Floresta</dt>
+                                        <dd class="col-sm-6">{{ wood.floresta}}</dd>
+
+                                        {% if wood.observacoes != "" %}
+                                            <dt class="col-sm-6">Observações</dt>
+                                            <dd class="col-sm-6">{{ wood.observacoes|linebreaks|urlize }}</dd>
+                                        {% endif %}
+
+                                    </dl>
+                                    
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <figure class="figure">
+                                                    <img src="{{ wood.foto_transversal.url }}" class="img-thumbnail img-responsive">
+                                                    <figcaption class="figure-caption">Transversal</figcaption>
+                                                </figure>
+                                            </div>
+                                           <div class="col-md-4">
+                                                <figure class="figure">
+                                                    <img src="{{ wood.foto_tangencial.url }}" class="img-thumbnail img-responsive">
+                                                    <figcaption class="figure-caption">Tangencial</figcaption>
+                                                </figure>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <figure class="figure">
+                                                    <img src="{{ wood.foto_radial.url }}" class="img-thumbnail img-responsive">
+                                                    <figcaption class="figure-caption font-weight-normal">Radial</figcaption>
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

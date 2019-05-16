@@ -1,0 +1,19 @@
+{% extends "wood/base.html" %}
+
+{% block content %}
+
+
+<div class="madeiras">
+    <div class="card">
+        <div class="card-header text-center">
+            {{ post.title }} - {{ post.published_date}}
+        </div>
+        <div class="card-body">
+            <p style="text-align: justify">
+                {{ post.text|linebreaks|urlize }}
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
